@@ -1,23 +1,19 @@
 const mongoose = require('mongoose');
+const express = require("express")
+require('./config/db.conifg')()
 
-// Import of the model Recipe from './models/Recipe.model.js'
-const Recipe = require('./models/Recipe.model');
-// Import of the data from './data.json'
-const data = require('./data');
+const index = express();
+index.use(express.json());
 
-const MONGODB_URI = 'mongodb://localhost:27017/recipe-app';
+//routes
+const recipesRouter = require('./routes/recipe.routes')
+index.use("/recipes", recipesRouter)
 
-// Connection to the database "recipe-app"
-mongoose
-  .connect(MONGODB_URI)
-  .then(x => {
-    console.log(`Connected to the database: "${x.connection.name}"`);
-    // Before adding any recipes to the database, let's remove all existing ones
-    return Recipe.deleteMany()
-  })
-  .then(() => {
-    // Run your code here, after you have insured that the connection was made
-  })
-  .catch(error => {
-    console.error('Error connecting to the database', error);
-  });
+
+const PORT = 8080
+
+index.listen(PORT, () => {
+  console.log(`Server up and running at port ${PORT}.`);
+})
+
+
