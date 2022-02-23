@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Recipe = require('../models/Recipe.model');
 
+// realizando a conexão com o bando de dados
 async function connect(){
     const MONGODB_URI = 'mongodb://localhost:27017/recipe-app';
     try {
@@ -12,14 +13,6 @@ async function connect(){
     } catch (err){
         console.error("database connection error", err)
     }
-
-
-
-
 }
-
-
-
-
 
 module.exports = connect;

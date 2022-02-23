@@ -9,7 +9,7 @@ index.use(express.json());
 const recipesRouter = require('./routes/recipe.routes')
 index.use("/recipes", recipesRouter)
 
-
+// instanciando a porta que vamos usar
 const PORT = 8080
 
 index.listen(PORT, () => {
